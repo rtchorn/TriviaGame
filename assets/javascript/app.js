@@ -1,6 +1,6 @@
 var startScreen;
 var gameHTML;
-var counter = 30;
+var counter = 25;
 var questionArray = ["What is Rick's favorite exhibit in Anatomy Park?", 
 "What does Snuffles want to be called after he abandoned his slave name?",
  "What is Rick's last name?", "What two leaders did Rick combine to create the perfect leader?", 
@@ -36,11 +36,11 @@ function initialScreen() {
 
 initialScreen();
 
-//Create a function, initiateHTML(), that is triggered by the start button, and generates the HTML seen on the project video...
+//Create a function, initiateHTML(), that is triggered by the start button
 
 $("body").on("click", ".start-button", function(event){
 	event.preventDefault();
-	clickSound.play();  // added line to test issue on GitHub Viewer
+	
 	initiateHTML();
 	timerWrapper();
 
@@ -48,7 +48,7 @@ $("body").on("click", ".start-button", function(event){
 
 $("body").on("click", ".answer", function(event){
 	//answeredQuestion = true;
-	clickSound.play();
+	
 	selectedAnswer = $(this).text();
 	if(selectedAnswer === answersCorrect[questionCounter]) {
 		//alert("correct");
@@ -57,36 +57,36 @@ $("body").on("click", ".answer", function(event){
 		initiateWin();
 	}
 	else {
-		//alert("wrong answer!");
+		
 		clearInterval(theClock);
 		initiateLoss();
 	}
-}); // Close .answer click
+}); // Close 
 
 $("body").on("click", ".reset-button", function(event){
-	clickSound.play();
+	
 	gameReset();
 }); // Closes reset-button click
 
-});  //  Closes jQuery wrapper
+}); 
 
 function initiateLossDueToTimeOut() {
 	unansweredTally++;
-	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>You ran out of time!  The correct answer was: " + answersCorrect[questionCounter] + "</p>" + "<img class='center-block img-wrong' src='img/x.png'>";
+	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>You're wasting my time! The correct answer was: " + answersCorrect[questionCounter] + "</p>" + "<img class='center-block img-wrong' src='img/x.png'>";
 	$(".mainArea").html(gameHTML);
 	setTimeout(wait, 4000);  //  change to 4000 or other amount
 }
 
 function initiateWin() {
 	correctTally++;
-	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>Correct! The answer is: " + answersCorrect[questionCounter] + "</p>" + imageArray[questionCounter];
+	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>By golly, you got it right! The answer is: " + answersCorrect[questionCounter] + "</p>" + imageArray[questionCounter];
 	$(".mainArea").html(gameHTML);
 	setTimeout(wait, 4000);  //  change to 4000 or other amount
 }
 
 function initiateLoss() {
 	incorrectTally++;
-	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>Wrong! The correct answer is: "+ answersCorrect[questionCounter] + "</p>" + "<img class='center-block img-wrong' src='img/x.png'>";
+	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>Wow, you really didn't know that one? The correct answer is: "+ answersCorrect[questionCounter] + "</p>" + "<img class='center-block img-wrong' src='img/x.png'>";
 	$(".mainArea").html(gameHTML);
 	setTimeout(wait, 4000); //  change to 4000 or other amount
 }
